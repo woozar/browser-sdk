@@ -4,17 +4,15 @@
 
 # BrowserSDK
 
-[![Build Status](https://img.shields.io/travis/com/lightelligence-io/browser-sdk.svg)](https://travis-ci.com/lightelligence-io/browser-sdk/branches)
-[![Code Coverage](https://img.shields.io/coveralls/github/lightelligence-io/browser-sdk.svg)](https://coveralls.io/github/lightelligence-io/browser-sdk)
-[![Dependencies](https://img.shields.io/david/lightelligence-io/browser-sdk.svg)](https://david-dm.org/lightelligence-io/browser-sdk)
-[![npm (scoped)](https://img.shields.io/npm/v/@lightelligence/browser-sdk.svg)](https://www.npmjs.com/package/@lightelligence/browser-sdk)
+[![Coverage Status](https://coveralls.io/repos/github/woozar/browser-sdk/badge.svg?branch=master)](https://coveralls.io/github/woozar/browser-sdk?branch=master)
+[![npm (scoped)](https://img.shields.io/npm/v/browser-sdk.svg)](https://www.npmjs.com/package/browser-sdk)
 
 > The Lightelligence API JavaScript Client for the Browser
 
 ## Installation
 
 ```
-npm install @lightelligence/browser-sdk
+npm install woozar/browser-sdk
 ```
 
 ## Features
