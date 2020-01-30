@@ -1,19 +1,19 @@
 export default {
-  issuer: 'https://id.dev.olt-dev.io/v1/id/auth/realms/olt',
+  issuer: 'http://id.dev.olt-dev.io/v1/id/auth/realms/IoT',
   authorization_endpoint:
-    'https://id.dev.olt-dev.io/v1/id/auth/realms/olt/protocol/openid-connect/auth',
+    'http://id.dev.olt-dev.io/v1/id/auth/realms/IoT/protocol/openid-connect/auth',
   token_endpoint:
-    'https://id.dev.olt-dev.io/v1/id/auth/realms/olt/protocol/openid-connect/token',
+    'http://id.dev.olt-dev.io/v1/id/auth/realms/IoT/protocol/openid-connect/token',
   token_introspection_endpoint:
-    'https://id.dev.olt-dev.io/v1/id/auth/realms/olt/protocol/openid-connect/token/introspect',
+    'http://id.dev.olt-dev.io/v1/id/auth/realms/IoT/protocol/openid-connect/token/introspect',
   userinfo_endpoint:
-    'https://id.dev.olt-dev.io/v1/id/auth/realms/olt/protocol/openid-connect/userinfo',
+    'http://id.dev.olt-dev.io/v1/id/auth/realms/IoT/protocol/openid-connect/userinfo',
   end_session_endpoint:
-    'https://id.dev.olt-dev.io/v1/id/auth/realms/olt/protocol/openid-connect/logout',
+    'http://id.dev.olt-dev.io/v1/id/auth/realms/IoT/protocol/openid-connect/logout',
   jwks_uri:
-    'https://id.dev.olt-dev.io/v1/id/auth/realms/olt/protocol/openid-connect/certs',
+    'http://id.dev.olt-dev.io/v1/id/auth/realms/IoT/protocol/openid-connect/certs',
   check_session_iframe:
-    'https://id.dev.olt-dev.io/v1/id/auth/realms/olt/protocol/openid-connect/login-status-iframe.html',
+    'http://id.dev.olt-dev.io/v1/id/auth/realms/IoT/protocol/openid-connect/login-status-iframe.html',
   grant_types_supported: [
     'authorization_code',
     'implicit',
@@ -37,7 +37,7 @@ export default {
   request_object_signing_alg_values_supported: ['none', 'RS256'],
   response_modes_supported: ['query', 'fragment', 'form_post'],
   registration_endpoint:
-    'https://id.dev.olt-dev.io/v1/id/auth/realms/olt/clients-registrations/openid-connect',
+    'http://id.dev.olt-dev.io/v1/id/auth/realms/IoT/clients-registrations/openid-connect',
   token_endpoint_auth_methods_supported: [
     'private_key_jwt',
     'client_secret_basic',

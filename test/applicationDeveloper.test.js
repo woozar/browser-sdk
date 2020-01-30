@@ -49,13 +49,15 @@ describe('ApplicationDeveloper module', () => {
   test('patchApplication calls ApiService', () => {
     const applicationId = 'fakeId';
     const applicationData = { name: 'test name' };
-    return Application.patchApplication(applicationId, applicationData).then(
-      () =>
-        expect(ApiService.call).toBeCalledWith(
-          `/application-developer/applications/${applicationId}`,
-          'PATCH',
-          applicationData
-        )
+    return Application.patchApplication(
+      applicationId,
+      applicationData
+    ).then(() =>
+      expect(ApiService.call).toBeCalledWith(
+        `/application-developer/applications/${applicationId}`,
+        'PATCH',
+        applicationData
+      )
     );
   });
   test('getAllowedTenants calls ApiService, params are optional', () => {

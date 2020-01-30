@@ -21,7 +21,7 @@ describe('user manager', () => {
   beforeEach(() => {
     XHRMock.setup();
     XHRMock.get(
-      'https://id.dev.olt-dev.io/v1/id/auth/realms/olt/.well-known/openid-configuration',
+      'https://id.dev.olt-dev.io/v1/id/auth/realms/IoT/.well-known/openid-configuration',
       (req, res) =>
         res
           .status(200)
@@ -31,7 +31,11 @@ describe('user manager', () => {
   });
 
   it('should not allow change tenant without refresh token', () => {
-    const sdk = new BrowserSDK({ environment: 'dev', clientId: 'foo-client' });
+    const sdk = new BrowserSDK({
+      baseUrl: 'dev.olt-dev.io/v1/id',
+      realm: 'IoT',
+      clientId: 'foo-client',
+    });
 
     sdk.manager.getUser = jest
       .fn()
@@ -43,7 +47,11 @@ describe('user manager', () => {
   });
 
   it('should not allow change tenant without user profile loaded', () => {
-    const sdk = new BrowserSDK({ environment: 'dev', clientId: 'foo-client' });
+    const sdk = new BrowserSDK({
+      baseUrl: 'dev.olt-dev.io/v1/id',
+      realm: 'IoT',
+      clientId: 'foo-client',
+    });
 
     sdk.manager.getUser = jest
       .fn()
@@ -57,7 +65,11 @@ describe('user manager', () => {
   });
 
   it('should call tokenClient.exchangeRefreshToken', () => {
-    const sdk = new BrowserSDK({ environment: 'dev', clientId: 'foo-client' });
+    const sdk = new BrowserSDK({
+      baseUrl: 'dev.olt-dev.io/v1/id',
+      realm: 'IoT',
+      clientId: 'foo-client',
+    });
     const tokenClient = sdk.manager._tokenClient; // eslint-disable-line
 
     sdk.manager.getUser = jest.fn().mockResolvedValue(mockUser('foo'));
@@ -77,7 +89,11 @@ describe('user manager', () => {
   });
 
   it('should throw error if response was not right', () => {
-    const sdk = new BrowserSDK({ environment: 'dev', clientId: 'foo-client' });
+    const sdk = new BrowserSDK({
+      baseUrl: 'dev.olt-dev.io/v1/id',
+      realm: 'IoT',
+      clientId: 'foo-client',
+    });
     const tokenClient = sdk.manager._tokenClient; // eslint-disable-line
 
     sdk.manager.getUser = jest.fn().mockResolvedValue(mockUser('foo'));
@@ -94,8 +110,12 @@ describe('user manager', () => {
     });
   });
 
-  it('should call jsonService.postForm', () => {
-    const sdk = new BrowserSDK({ environment: 'dev', clientId: 'foo-client' });
+  it('should call jsonService.postForm', async () => {
+    const sdk = new BrowserSDK({
+      baseUrl: 'dev.olt-dev.io/v1/id',
+      realm: 'IoT',
+      clientId: 'foo-client',
+    });
     const tokenClient = sdk.manager._tokenClient; // eslint-disable-line
     const jsonService = tokenClient._jsonService; // eslint-disable-line
 
@@ -120,7 +140,11 @@ describe('user manager', () => {
   });
 
   it('should ignore headers in jsonService.postForm', () => {
-    const sdk = new BrowserSDK({ environment: 'dev', clientId: 'foo-client' });
+    const sdk = new BrowserSDK({
+      baseUrl: 'dev.olt-dev.io/v1/id',
+      realm: 'IoT',
+      clientId: 'foo-client',
+    });
     const tokenClient = sdk.manager._tokenClient; // eslint-disable-line
     const jsonService = tokenClient._jsonService; // eslint-disable-line
 
@@ -141,7 +165,11 @@ describe('user manager', () => {
   });
 
   it('should complain if url is not added to jsonService.postForm', () => {
-    const sdk = new BrowserSDK({ environment: 'dev', clientId: 'foo-client' });
+    const sdk = new BrowserSDK({
+      baseUrl: 'dev.olt-dev.io/v1/id',
+      realm: 'IoT',
+      clientId: 'foo-client',
+    });
     const tokenClient = sdk.manager._tokenClient; // eslint-disable-line
     const jsonService = tokenClient._jsonService; // eslint-disable-line
 
@@ -149,7 +177,11 @@ describe('user manager', () => {
   });
 
   it('should properly call XMLHttpRequest', () => {
-    const sdk = new BrowserSDK({ environment: 'dev', clientId: 'foo-client' });
+    const sdk = new BrowserSDK({
+      baseUrl: 'dev.olt-dev.io/v1/id',
+      realm: 'IoT',
+      clientId: 'foo-client',
+    });
 
     sdk.manager.getUser = jest.fn().mockResolvedValue(mockUser('foo'));
 
@@ -173,7 +205,11 @@ describe('user manager', () => {
   });
 
   it('should properly handle errors in XMLHttpRequest', () => {
-    const sdk = new BrowserSDK({ environment: 'dev', clientId: 'foo-client' });
+    const sdk = new BrowserSDK({
+      baseUrl: 'dev.olt-dev.io/v1/id',
+      realm: 'IoT',
+      clientId: 'foo-client',
+    });
 
     sdk.manager.getUser = jest.fn().mockResolvedValue(mockUser('foo'));
 
@@ -190,7 +226,11 @@ describe('user manager', () => {
   });
 
   it('should properly handle no errors in body in XMLHttpRequest', () => {
-    const sdk = new BrowserSDK({ environment: 'dev', clientId: 'foo-client' });
+    const sdk = new BrowserSDK({
+      baseUrl: 'dev.olt-dev.io/v1/id',
+      realm: 'IoT',
+      clientId: 'foo-client',
+    });
 
     sdk.manager.getUser = jest.fn().mockResolvedValue(mockUser('foo'));
 
@@ -208,7 +248,11 @@ describe('user manager', () => {
   });
 
   it('should complain for malformed response XMLHttpRequest', () => {
-    const sdk = new BrowserSDK({ environment: 'dev', clientId: 'foo-client' });
+    const sdk = new BrowserSDK({
+      baseUrl: 'dev.olt-dev.io/v1/id',
+      realm: 'IoT',
+      clientId: 'foo-client',
+    });
 
     sdk.manager.getUser = jest.fn().mockResolvedValue(mockUser('foo'));
 
@@ -225,7 +269,11 @@ describe('user manager', () => {
   });
 
   it('should properly handle not allowed content type', () => {
-    const sdk = new BrowserSDK({ environment: 'dev', clientId: 'foo-client' });
+    const sdk = new BrowserSDK({
+      baseUrl: 'dev.olt-dev.io/v1/id',
+      realm: 'IoT',
+      clientId: 'foo-client',
+    });
 
     sdk.manager.getUser = jest.fn().mockResolvedValue(mockUser('foo'));
 
@@ -238,13 +286,17 @@ describe('user manager', () => {
 
     return sdk.changeTenant('bar').catch(error => {
       expect(error.message).toEqual(
-        'Invalid response Content-Type: invalid, from URL: https://id.dev.olt-dev.io/v1/id/auth/realms/olt/protocol/openid-connect/token'
+        'Invalid response Content-Type: invalid, from URL: http://id.dev.olt-dev.io/v1/id/auth/realms/IoT/protocol/openid-connect/token'
       );
     });
   });
 
   it('should properly handle not allowed content type with 400', () => {
-    const sdk = new BrowserSDK({ environment: 'dev', clientId: 'foo-client' });
+    const sdk = new BrowserSDK({
+      baseUrl: 'dev.olt-dev.io/v1/id',
+      realm: 'IoT',
+      clientId: 'foo-client',
+    });
 
     sdk.manager.getUser = jest.fn().mockResolvedValue(mockUser('foo'));
 
@@ -262,7 +314,11 @@ describe('user manager', () => {
   });
 
   it('should properly handle network errors', () => {
-    const sdk = new BrowserSDK({ environment: 'dev', clientId: 'foo-client' });
+    const sdk = new BrowserSDK({
+      baseUrl: 'dev.olt-dev.io/v1/id',
+      realm: 'IoT',
+      clientId: 'foo-client',
+    });
 
     sdk.manager.getUser = jest.fn().mockResolvedValue(mockUser('foo'));
 
@@ -274,7 +330,11 @@ describe('user manager', () => {
   });
 
   it('should properly handle server errors in XMLHttpRequest', () => {
-    const sdk = new BrowserSDK({ environment: 'dev', clientId: 'foo-client' });
+    const sdk = new BrowserSDK({
+      baseUrl: 'dev.olt-dev.io/v1/id',
+      realm: 'IoT',
+      clientId: 'foo-client',
+    });
 
     sdk.manager.getUser = jest.fn().mockResolvedValue(mockUser('foo'));
 

@@ -36,7 +36,7 @@ describe('ApiService.call', () => {
     });
 
     expect(ApiService.call('/test-uri')).rejects.toEqual(
-      new Error('OLT Browser SDK: No authorized user found')
+      new Error('Browser SDK: No authorized user found')
     );
   });
 

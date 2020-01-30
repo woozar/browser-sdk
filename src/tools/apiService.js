@@ -25,7 +25,7 @@ async function call(path, method = 'GET', body = null) {
   const { apiUri } = environmentProvider.get();
 
   if (!user) {
-    throw Error('OLT Browser SDK: No authorized user found');
+    throw Error('Browser SDK: No authorized user found');
   }
 
   return fetch(`${apiUri}${path}`, {

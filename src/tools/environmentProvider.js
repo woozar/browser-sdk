@@ -5,10 +5,8 @@
 class EnvironmentProvider {
   constructor() {
     this.envs = {
-      dev: 'dev.olt-dev.io',
-      int: 'int.olt-dev.io',
-      preview: 'olt-preview.io',
-      prod: 'lightelligence.io',
+      dev: '127.0.0.1',
+      showcase: 'id.showcase',
     };
   }
 
@@ -32,15 +30,6 @@ class EnvironmentProvider {
    */
   clear() {
     this.environment = undefined;
-  }
-
-  /**
-   * Get the base url for one of the existing environments
-   * @param {The enviroment to request the url for} environment
-   * @returns The url as a string
-   */
-  getBaseUrlFromEnv(environment) {
-    return this.envs[environment];
   }
 }
 

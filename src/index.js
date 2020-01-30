@@ -44,20 +44,25 @@ const AUTH_CALLBACK_DEFAULT_PATH = '/auth-callback';
  */
 export default class BrowserSDK {
   constructor({
-    environment,
+    baseUrl,
+    realm,
+    secure = true,
     clientId,
     scope = ['openid', 'profile', 'email'],
     authCallback = AUTH_CALLBACK_DEFAULT_PATH,
   }) {
-    if (!environment || !clientId) {
-      throw Error('OLT Browser SDK: Missing one or more init options.');
+    if (!baseUrl || !clientId || !realm) {
+      throw Error(
+        'Browser SDK: Missing one or more init options (required: baseUrl, clientId, realm).'
+      );
     }
-    const baseUrl = environmentProvider.getBaseUrlFromEnv(environment);
 
     this.authCallback = authCallback;
 
     this.manager = new UserManager({
-      authority: `https://id.${baseUrl}/v1/id/auth/realms/olt`,
+      authority: `${
+        secure ? 'https' : 'http'
+      }://id.${baseUrl}/auth/realms/${realm}`,
       client_id: clientId,
       scope: scope.join(' '),
       response_type: 'code', // Authorisation code flow only since we don't support anything else
@@ -79,7 +84,7 @@ export default class BrowserSDK {
 
     userManagerProvider.set(this.manager);
     environmentProvider.set({
-      apiUri: `https://api.${baseUrl}/v1`,
+      apiUri: `${secure ? 'https' : 'http'}://api.${this.baseUrl}/v1`,
       clientId,
     });
   }
@@ -89,7 +94,7 @@ export default class BrowserSDK {
    * @param {Object} [options]
    * @param {string} [options.loginHint] - login_hint to forward email/username in keycloak.
    */
-  login({ loginHint } = {}) {
+  async login({ loginHint } = {}) {
     return this.manager.getUser().then(user => {
       // ignore this code only on redirect from token issuer
       if (!user && window.location.pathname !== this.authCallback) {
@@ -106,7 +111,7 @@ export default class BrowserSDK {
    *
    * @param {string} [tenantId]  The tenant id that the user wants to change to
    */
-  changeTenant(tenantId) {
+  async changeTenant(tenantId) {
     return tenantId
       ? this.manager.changeTenant(tenantId)
       : this.manager.signinRedirect();
