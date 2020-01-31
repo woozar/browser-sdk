@@ -84,7 +84,7 @@ export default class BrowserSDK {
 
     userManagerProvider.set(this.manager);
     environmentProvider.set({
-      apiUri: `${secure ? 'https' : 'http'}://api.${this.baseUrl}/v1`,
+      apiUri: `${secure ? 'https' : 'http'}://api.${baseUrl}/v1`,
       clientId,
     });
   }
